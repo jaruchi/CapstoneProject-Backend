@@ -20,6 +20,12 @@ public class RequirementController {
     public void setRequirementService(RequirementService requirementService){
         this.requirementService = requirementService;
     }
+    // http://localhost:9092/api/requirements/jobtype/{jobtypeid}
+    @GetMapping(path = "/requirements/jobtype/{jobtypeId}")
+    public Requirement getRequirement(@PathVariable(value = "jobtypeId") Long jobtypeId) {
+        LOGGER.info("calling getRequirement for a job type method from controller");
+        return requirementService.getRequirement(jobtypeId);
+    }
 
     // http://localhost:9092/api/requirements/jobtype/{jobtypeid}
     @PostMapping(path = "/requirements/jobtype/{jobtypeId}")
@@ -27,13 +33,6 @@ public class RequirementController {
                                          @RequestBody Requirement requirementObject) {
         LOGGER.info("calling createRequirement method from controller");
         return requirementService.createRequirement(jobtypeId,requirementObject);
-    }
-
-    // http://localhost:9092/api/requirements/jobtype/{jobtypeid}
-    @GetMapping(path = "/requirements/jobtype/{jobtypeId}")
-    public Requirement getRequirement(@PathVariable(value = "jobtypeId") Long jobtypeId) {
-        LOGGER.info("calling getRequirement for a job type method from controller");
-        return requirementService.getRequirement(jobtypeId);
     }
 
     // http://localhost:9092/api/requirements

@@ -33,20 +33,20 @@ public class RequirementService {
         this.jobTypeRepository = jobTypeRepository;
     }
 
-    public Requirement createRequirement(Long jobtypeid,Requirement requirementObject) {
+    public Requirement createRequirement(Long jobtypeId,Requirement requirementObject) {
         LOGGER.info("calling createRequirement method from service");
 
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Requirement requirement = requirementRepository.findByUserIdAndAndId(userDetails.getUser().getId(),
-                                                                              jobtypeid);
+                jobtypeId);
 
         if (requirement != null) {
             throw new InformationExistException("requirement for job type " + requirement.getJobType().getType() + " already " +
                     "exists");
         }
-        Optional<JobType> jobType = jobTypeRepository.findById(jobtypeid);
+        Optional<JobType> jobType = jobTypeRepository.findById(jobtypeId);
         if (!jobType.isPresent()) {
             throw new InformationNotFoundException("Job Type " + jobType.get().getType() + " do not exists ");
         }
@@ -55,19 +55,19 @@ public class RequirementService {
             return requirementRepository.save(requirementObject);
     }
 
-    public Requirement getRequirement(Long jobtypeid) {
+    public Requirement getRequirement(Long jobtypeId) {
         LOGGER.info("calling getRequirement method from service");
 
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Requirement requirement = requirementRepository.findByUserIdAndAndId(userDetails.getUser().getId(),
-                jobtypeid);
+                jobtypeId);
         if (requirement == null) {
             throw new InformationNotFoundException("requirement for job type " + requirement.getJobType() + " do not " +
                     "exists");
         }
-        Optional<JobType> jobType = jobTypeRepository.findById(jobtypeid);
+        Optional<JobType> jobType = jobTypeRepository.findById(jobtypeId);
         if (!jobType.isPresent()) {
             throw new InformationNotFoundException("Job Type " + jobType.get().getType() + " do not exists ");
         }
@@ -85,14 +85,14 @@ public class RequirementService {
         return requirementList;
     }
 
-    public Requirement updateRequirement(Long jobtypeid, Requirement requirementObject) {
+    public Requirement updateRequirement(Long jobtypeId, Requirement requirementObject) {
         LOGGER.info("calling updateRequirement method from service");
 
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Requirement requirement = requirementRepository.findByUserIdAndAndId(userDetails.getUser().getId(),
-                jobtypeid);
+                jobtypeId);
         if (requirement == null) {
             throw new InformationNotFoundException("requirement do not exists for this job");
         }
@@ -119,7 +119,7 @@ public class RequirementService {
         Optional<Requirement> requirement = requirementRepository.findById(requirementId);
 
         if (requirement.isEmpty()) {
-            throw new InformationNotFoundException("course with id : " + requirementId +
+            throw new InformationNotFoundException("requirement with id : " + requirementId +
                     " not found");
         }
         requirementRepository.deleteById(requirement.get().getId());
