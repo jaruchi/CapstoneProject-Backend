@@ -17,12 +17,12 @@ public class Application {
     private String heading;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userid")
     @JsonIgnore
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "jobtype_id")
+    @JoinColumn(name = "jobtypeid")
     @JsonIgnore
     private JobType jobType;
 

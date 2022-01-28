@@ -1,4 +1,4 @@
 package com.cpbackend.cpbackendapp.repository;
 
-public class UserProfileRepository {
+public interface UserProfileRepository {
 }

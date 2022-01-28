@@ -1,8 +1,12 @@
 package com.cpbackend.cpbackendapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "requirements")
@@ -16,22 +20,42 @@ public class Requirement {
     @Column
     private String title;
 
+    @Column
+    private String reqDescription;
+
+    @Column
+    private Date createDate;
+
+    @Column
+    private Date expiredDate;
+
+    @Column
+    private Date modifiedDate;
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userid")
     @JsonIgnore
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "jobtype_id")
+    @JoinColumn(name = "jobtypeid")
     @JsonIgnore
     private JobType jobType;
+
+//    @OneToOne(mappedBy = "jobtype", orphanRemoval = true)
+//    @LazyCollection(LazyCollectionOption.FALSE)
+//    private JobType jobTypeData;
 
     public Requirement() {
     }
 
-    public Requirement(Long id, String title) {
+    public Requirement(Long id, String title, String reqDescription, Date createDate, Date expiredDate, Date modifiedDate) {
         this.id = id;
         this.title = title;
+        this.reqDescription = reqDescription;
+        this.createDate = createDate;
+        this.expiredDate = expiredDate;
+        this.modifiedDate = modifiedDate;
     }
 
     public Long getId() {
@@ -64,5 +88,37 @@ public class Requirement {
 
     public void setJobType(JobType jobType) {
         this.jobType = jobType;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getExpiredDate() {
+        return expiredDate;
+    }
+
+    public void setExpiredDate(Date expiredDate) {
+        this.expiredDate = expiredDate;
+    }
+
+    public Date getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+
+    public String getReqDescription() {
+        return reqDescription;
+    }
+
+    public void setReqDescription(String reqDescription) {
+        this.reqDescription = reqDescription;
     }
 }

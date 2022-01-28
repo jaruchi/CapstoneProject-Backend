@@ -6,13 +6,11 @@ import com.cpbackend.cpbackendapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/auth/users")
 public class UserController {
@@ -42,5 +40,13 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){
         LOGGER.info("calling loginUser method from user controller");
         return userService.loginUser(loginRequest);
+    }
+
+    //to check if user is logged in
+    //http://localhost:9092/auth/users/isloggedin
+    @GetMapping("/isloggedin")
+    public User isLoggedIn(){
+        LOGGER.info("calling isLoggedIn method from user controller");
+        return userService.isLoggedIn();
     }
 }

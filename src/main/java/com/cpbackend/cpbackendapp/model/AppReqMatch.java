@@ -17,12 +17,12 @@ public class AppReqMatch {
     private Boolean accepted;
 
     @OneToOne
-    @JoinColumn(name = "req_id")
+    @JoinColumn(name = "reqid")
     @JsonIgnore
     private Requirement requirement;
 
     @OneToOne
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     @JsonIgnore
     private Application application;
 }

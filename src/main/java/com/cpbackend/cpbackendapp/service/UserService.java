@@ -6,10 +6,12 @@ import com.cpbackend.cpbackendapp.model.request.LoginRequest;
 import com.cpbackend.cpbackendapp.model.response.LoginResponse;
 import com.cpbackend.cpbackendapp.repository.UserRepository;
 import com.cpbackend.cpbackendapp.security.JWTUtils;
+import com.cpbackend.cpbackendapp.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -63,5 +65,16 @@ public class UserService {
 
     public User findUserByEmailAddress(String email) {
         return userRepository.findUserByEmailAddress(email);
+    }
+
+    public User isLoggedIn() {
+        LOGGER.info("calling isLoggedIn method from service");
+        MyUserDetails userDetails =
+                (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if(userDetails.isEnabled()){
+            return userDetails.getUser();
+        }
+        return  null;
     }
 }

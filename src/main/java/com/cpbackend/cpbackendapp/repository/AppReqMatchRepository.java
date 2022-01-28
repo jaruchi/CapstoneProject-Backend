@@ -1,4 +1,4 @@
 package com.cpbackend.cpbackendapp.repository;
 
-public class AppReqMatchRepository {
+public interface AppReqMatchRepository {
 }
