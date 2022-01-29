@@ -39,7 +39,7 @@ public class RequirementService {
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Requirement requirement = requirementRepository.findByUserIdAndAndId(userDetails.getUser().getId(),
+        Requirement requirement = requirementRepository.findByUserIdAndId(userDetails.getUser().getId(),
                 jobtypeId);
 
         if (requirement != null) {
@@ -55,21 +55,16 @@ public class RequirementService {
             return requirementRepository.save(requirementObject);
     }
 
-    public Requirement getRequirement(Long jobtypeId) {
+    public Requirement getRequirement(Long requirementId) {
         LOGGER.info("calling getRequirement method from service");
 
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Requirement requirement = requirementRepository.findByUserIdAndAndId(userDetails.getUser().getId(),
-                jobtypeId);
+        Requirement requirement = requirementRepository.findByUserIdAndId(userDetails.getUser().getId(),
+                requirementId);
         if (requirement == null) {
-            throw new InformationNotFoundException("requirement for job type " + requirement.getJobType() + " do not " +
-                    "exists");
-        }
-        Optional<JobType> jobType = jobTypeRepository.findById(jobtypeId);
-        if (!jobType.isPresent()) {
-            throw new InformationNotFoundException("Job Type " + jobType.get().getType() + " do not exists ");
+            throw new InformationNotFoundException("requirement for id "+requirementId+" do not exists");
         }
         return requirement;
     }
@@ -85,14 +80,14 @@ public class RequirementService {
         return requirementList;
     }
 
-    public Requirement updateRequirement(Long jobtypeId, Requirement requirementObject) {
+    public Requirement updateRequirement(Long requirementId, Requirement requirementObject) {
         LOGGER.info("calling updateRequirement method from service");
 
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Requirement requirement = requirementRepository.findByUserIdAndAndId(userDetails.getUser().getId(),
-                jobtypeId);
+        Requirement requirement = requirementRepository.findByUserIdAndId(userDetails.getUser().getId(),
+                requirementId);
         if (requirement == null) {
             throw new InformationNotFoundException("requirement do not exists for this job");
         }
@@ -110,19 +105,39 @@ public class RequirementService {
         return requirementRepository.save(requirement);
     }
 
-    public Optional<Requirement> deleteRequirement(Long requirementId) {
+    public Requirement deleteRequirement(Long requirementId) {
         LOGGER.info("calling deleteRequirement method from service");
 
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Optional<Requirement> requirement = requirementRepository.findById(requirementId);
+        Requirement requirement = requirementRepository.findByUserIdAndId(userDetails.getUser().getId(),
+                requirementId);
 
-        if (requirement.isEmpty()) {
+        if (requirement==null) {
             throw new InformationNotFoundException("requirement with id : " + requirementId +
                     " not found");
         }
-        requirementRepository.deleteById(requirement.get().getId());
+        requirementRepository.deleteById(requirement.getId());
         return requirement;
+    }
+
+    public List<Requirement> getOpenRequirements() {
+        LOGGER.info("calling getOpenRequirements method from service");
+
+        MyUserDetails userDetails =
+                (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return requirementRepository.findMyOpenRequirements(userDetails.getUser().getId());
+    }
+
+    public List<Requirement> getFulfilledRequirements() {
+        LOGGER.info("calling getOpenRequirements method from service");
+
+        MyUserDetails userDetails =
+                (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return requirementRepository.findMyFulfilledRequirements(userDetails.getUser().getId());
+
     }
 }

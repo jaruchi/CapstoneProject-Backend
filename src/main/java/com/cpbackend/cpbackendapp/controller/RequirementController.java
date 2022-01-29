@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 @RestController
@@ -20,11 +19,11 @@ public class RequirementController {
     public void setRequirementService(RequirementService requirementService){
         this.requirementService = requirementService;
     }
-    // http://localhost:9092/api/requirements/jobtype/{jobtypeid}
-    @GetMapping(path = "/requirements/jobtype/{jobtypeId}")
-    public Requirement getRequirement(@PathVariable(value = "jobtypeId") Long jobtypeId) {
+    // http://localhost:9092/api/requirements/{requirementid}
+    @GetMapping(path = "/requirements/{requirementId}")
+    public Requirement getRequirement(@PathVariable(value = "requirementId") Long requirementId) {
         LOGGER.info("calling getRequirement for a job type method from controller");
-        return requirementService.getRequirement(jobtypeId);
+        return requirementService.getRequirement(requirementId);
     }
 
     // http://localhost:9092/api/requirements/jobtype/{jobtypeid}
@@ -42,18 +41,32 @@ public class RequirementController {
         return requirementService.getAllRequirements();
     }
 
-    // http://localhost:9092/api/requirements/jobtype/{jobtypeid}
-    @PutMapping(path = "/requirements/jobtype/{jobtypeId}")
-    public Requirement updateRequirement(@PathVariable(value = "jobtypeId") Long jobtypeId,
+    // http://localhost:9092/api/requirements/{requirementid}
+    @PutMapping(path = "/requirements/{requirementId}")
+    public Requirement updateRequirement(@PathVariable(value = "requirementId") Long requirementId,
                                          @RequestBody Requirement requirementObject){
         LOGGER.info("calling updateRequirement method from controller");
-        return requirementService.updateRequirement(jobtypeId,requirementObject);
+        return requirementService.updateRequirement(requirementId,requirementObject);
     }
 
     // http://localhost:9092/api/requirements/{requirementid}
     @DeleteMapping(path="/requirements/{requirementId}")
-    public Optional<Requirement> deleteRequirement(@PathVariable(value = "requirementId") Long requirementId){
+    public Requirement deleteRequirement(@PathVariable(value = "requirementId") Long requirementId){
         LOGGER.info("calling deleteRequirement method from controller");
         return requirementService.deleteRequirement(requirementId);
+    }
+
+    // http://localhost:9092/api/openrequirements/
+    @GetMapping(path="/requirements/opened")
+    public List<Requirement> getOpenRequirements(){
+        LOGGER.info("calling getOpenRequirements method from controller");
+        return requirementService.getOpenRequirements();
+    }
+
+    // http://localhost:9092/api/openrequirements/
+    @GetMapping(path="/requirements/fulfilled")
+    public List<Requirement> getFulfilledRequirements(){
+        LOGGER.info("calling getFulfilledRequirements method from controller");
+        return requirementService.getFulfilledRequirements();
     }
 }
