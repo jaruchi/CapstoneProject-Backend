@@ -1,6 +1,7 @@
 package com.cpbackend.cpbackendapp.controller;
 
 import com.cpbackend.cpbackendapp.model.Application;
+import com.cpbackend.cpbackendapp.model.Requirement;
 import com.cpbackend.cpbackendapp.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +22,11 @@ public class ApplicationController {
         this.applicationService = applicationService;
     }
 
-    // http://localhost:9092/api/applications/jobtype/{jobtypeid}
-    @GetMapping(path = "/applications/jobtype/{jobtypeId}")
-    public Application getApplication(@PathVariable(value = "jobtypeId") Long jobtypeId) {
+    // http://localhost:9092/api/applications/{applicationid}
+    @GetMapping(path = "/applications/{applicationId}")
+    public Application getApplication(@PathVariable(value = "applicationId") Long applicationId) {
         LOGGER.info("calling getApplication for a job type method from controller");
-        return applicationService.getApplication(jobtypeId);
+        return applicationService.getApplication(applicationId);
     }
 
     // http://localhost:9092/api/applications/jobtype/{jobtypeid}
@@ -43,18 +44,34 @@ public class ApplicationController {
         return applicationService.getAllApplications();
     }
 
-    // http://localhost:9092/api/applications/jobtype/{jobtypeid}
-    @PutMapping(path = "/applications/jobtype/{jobtypeId}")
-    public Application updateApplication(@PathVariable(value = "jobtypeId") Long jobtypeId,
+    // http://localhost:9092/api/applications/{applicationid}
+    @PutMapping(path = "/applications/{applicationId}")
+    public Application updateApplication(@PathVariable(value = "applicationId") Long applicationId,
                                          @RequestBody Application applicationObject){
         LOGGER.info("calling updateApplication method from controller");
-        return applicationService.updateApplication(jobtypeId,applicationObject);
+        return applicationService.updateApplication(applicationId,applicationObject);
     }
 
     // http://localhost:9092/api/applications/{applicationid}
     @DeleteMapping(path="/applications/{applicationId}")
-    public Optional<Application> deleteApplication(@PathVariable(value = "applicationId") Long applicationId){
+    public Application deleteApplication(@PathVariable(value = "applicationId") Long applicationId){
         LOGGER.info("calling deleteApplication method from controller");
         return applicationService.deleteApplication(applicationId);
     }
+
+
+    // http://localhost:9092/api/applications/open
+    @GetMapping(path="/applications/open")
+    public List<Application> getOpenApplications(){
+        LOGGER.info("calling getOpenApplications method from controller");
+        return applicationService.getOpenApplications();
+    }
+
+    // http://localhost:9092/api/applications/fulfilled
+    @GetMapping(path="/applications/fulfilled")
+    public List<Application> getFulfilledApplications(){
+        LOGGER.info("calling getFulfilledApplications method from controller");
+        return applicationService.getFulfilledApplications();
+    }
+
 }

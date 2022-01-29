@@ -7,7 +7,6 @@ import com.cpbackend.cpbackendapp.model.JobType;
 import com.cpbackend.cpbackendapp.model.Requirement;
 import com.cpbackend.cpbackendapp.repository.ApplicationRepository;
 import com.cpbackend.cpbackendapp.repository.JobTypeRepository;
-import com.cpbackend.cpbackendapp.repository.RequirementRepository;
 import com.cpbackend.cpbackendapp.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,7 +40,7 @@ public class ApplicationService {
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Application application = applicationRepository.findByUserIdAndAndId(userDetails.getUser().getId(),
+        Application application = applicationRepository.findByUserIdAndId(userDetails.getUser().getId(),
                 jobtypeId);
 
         if (application != null) {
@@ -57,21 +56,17 @@ public class ApplicationService {
         return applicationRepository.save(applicationObject);
     }
 
-    public Application getApplication(Long jobtypeId) {
+    public Application getApplication(Long applicationId) {
             LOGGER.info("calling getApplication method from service");
 
             MyUserDetails userDetails =
                     (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            Application application = applicationRepository.findByUserIdAndAndId(userDetails.getUser().getId(),
-                    jobtypeId);
+            Application application = applicationRepository.findByUserIdAndId(userDetails.getUser().getId(),
+                    applicationId);
             if (application == null) {
-                throw new InformationNotFoundException("application for job type " + application.getJobType().getType()
+                throw new InformationNotFoundException("application for id " + application.getId()
                         + " do not exists");
-            }
-            Optional<JobType> jobType = jobTypeRepository.findById(jobtypeId);
-            if (!jobType.isPresent()) {
-                throw new InformationNotFoundException("Job Type " + jobType.get().getType() + " do not exists ");
             }
             return application;
         }
@@ -89,14 +84,14 @@ public class ApplicationService {
         return applicationList;
     }
 
-    public Application updateApplication(Long jobtypeId, Application applicationObject) {
+    public Application updateApplication(Long applicationId, Application applicationObject) {
         LOGGER.info("calling updateApplication method from service");
 
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Application application = applicationRepository.findByUserIdAndAndId(userDetails.getUser().getId(),
-                jobtypeId);
+        Application application = applicationRepository.findByUserIdAndId(userDetails.getUser().getId(),
+                applicationId);
         if (application == null) {
             throw new InformationNotFoundException("application do not exists for this job");
         }
@@ -112,19 +107,41 @@ public class ApplicationService {
         return applicationRepository.save(application);
     }
 
-    public Optional<Application> deleteApplication(Long applicationId) {
+    public Application deleteApplication(Long applicationId) {
         LOGGER.info("calling deleteApplication method from service");
 
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Optional<Application> application = applicationRepository.findById(applicationId);
+        Application application = applicationRepository.findByUserIdAndId(userDetails.getUser().getId(),applicationId);
 
-        if (application.isEmpty()) {
+        if (application==null) {
             throw new InformationNotFoundException("application with id : " + applicationId +
                     " not found");
         }
-        applicationRepository.deleteById(application.get().getId());
+        applicationRepository.deleteById(application.getId());
         return application;
     }
+
+
+    public List<Application> getOpenApplications() {
+        LOGGER.info("calling getOpenApplications method from service");
+
+        MyUserDetails userDetails =
+                (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return applicationRepository.findMyOpenApplications(userDetails.getUser().getId());
+    }
+
+
+
+    public List<Application> getFulfilledApplications() {
+        LOGGER.info("calling getFulfilledApplications method from service");
+
+        MyUserDetails userDetails =
+                (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return applicationRepository.findMyFulfilledApplications(userDetails.getUser().getId());
+    }
+
 }
