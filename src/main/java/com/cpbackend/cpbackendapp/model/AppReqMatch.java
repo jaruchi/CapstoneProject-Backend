@@ -25,4 +25,45 @@ public class AppReqMatch {
     @JoinColumn(name = "appid")
     @JsonIgnore
     private Application application;
+
+    public AppReqMatch() {
+    }
+
+    public AppReqMatch(Long id, Boolean accepted) {
+        this.id = id;
+        this.accepted = accepted;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Boolean getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public Requirement getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(Requirement requirement) {
+        this.requirement = requirement;
+    }
+
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
+    }
+
 }
