@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.logging.Logger;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path="/api")
 public class RequirementController {

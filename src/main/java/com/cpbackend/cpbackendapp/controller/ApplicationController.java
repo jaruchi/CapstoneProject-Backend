@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path="/api")
 public class ApplicationController {
