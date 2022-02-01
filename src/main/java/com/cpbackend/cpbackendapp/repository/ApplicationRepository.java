@@ -27,10 +27,6 @@ public interface ApplicationRepository extends JpaRepository<Application,Long> {
     Application findByUserIdAndId(Long id, Long applicationId);
     Application findByIdAndUserIdNot(long id, Long userId);
 
-//    @Query("Select app from Application app " +
-//         "left join AppReqMatch arm on arm.application.id = app.id " +
-//         "where app.user.id <> :userid " +
-//         "and app.jobType.id =:jobtypeid")
 
     @Query("Select app from Application app "  +
             "where app.user.id <> :userid " +

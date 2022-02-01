@@ -16,6 +16,11 @@ public class Application {
     @Column
     private String heading;
 
+
+    @Column
+    private String appDescription;
+
+
     @ManyToOne
     @JoinColumn(name = "userid")
     //@JsonIgnore
@@ -29,10 +34,12 @@ public class Application {
     public Application() {
     }
 
-    public Application(Long id, String heading) {
+    public Application(Long id, String heading, String appDescription) {
         this.id = id;
         this.heading = heading;
+        this.appDescription = appDescription;
     }
+
 
     public Long getId() {
         return id;
@@ -64,5 +71,13 @@ public class Application {
 
     public void setJobType(JobType jobType) {
         this.jobType = jobType;
+    }
+
+    public String getAppDescription() {
+        return appDescription;
+    }
+
+    public void setAppDescription(String appDescription) {
+        this.appDescription = appDescription;
     }
 }

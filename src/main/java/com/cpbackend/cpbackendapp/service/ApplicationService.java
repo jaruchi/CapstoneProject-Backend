@@ -99,12 +99,8 @@ public class ApplicationService {
 
         if (applicationObject.getHeading() != null)
             application.setHeading(applicationObject.getHeading());
-//        if (requirementObject.getCreateDate() != null)
-//            requirement.setCreateDate(applicationObject.getCreateDate());
-//        if (requirementObject.getExpiredDate() != null)
-//            requirement.setExpiredDate(applicationObject.getExpiredDate());
-//        if (requirementObject.getModifiedDate() != null)
-//            requirement.setModifiedDate(applicationObject.getModifiedDate());
+        //if (applicationObject.)
+            //application.setModifiedDate(applicationObject.getModifiedDate());
         return applicationRepository.save(application);
     }
 
