@@ -26,5 +26,6 @@ public interface RequirementRepository extends JpaRepository<Requirement,Long> {
     Requirement findByUserIdAndId(Long userId, Long Id);
     Requirement findByIdAndUserIdNot(Long id, Long userId);
 
+    //List<Requirement> findByUserIdAndJobId(Long userId, Long jobId);
 
 }

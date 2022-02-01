@@ -7,6 +7,7 @@ import com.cpbackend.cpbackendapp.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @CrossOrigin
@@ -36,6 +37,20 @@ public class AppReqMatchController {
                                          @PathVariable(value = "requirementId") Long requirementId) {
         LOGGER.info("calling createReqToAppMatch method from controller");
         return appReqMatchService.createReqToAppMatch(applicationId,requirementId);
+    }
+
+    //GET http://localhost:9092/api/match/requirements
+    @GetMapping(path = "/match/requirements")
+    public List<AppReqMatch> getAllMatchedRequirements() {
+        LOGGER.info("calling getAllMatchedRequirements method from controller");
+        return appReqMatchService.getAllMatchedRequirements();
+    }
+
+    //GET http://localhost:9092/api/match/applications
+    @GetMapping(path = "/match/applications")
+    public List<AppReqMatch> getAllMatchedApplications() {
+        LOGGER.info("calling getAllMatchedApplications method from controller");
+        return appReqMatchService.getAllMatchedApplications();
     }
 
 }

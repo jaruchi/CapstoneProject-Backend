@@ -1,13 +1,11 @@
 package com.cpbackend.cpbackendapp.controller;
 
 import com.cpbackend.cpbackendapp.model.Application;
-import com.cpbackend.cpbackendapp.model.Requirement;
 import com.cpbackend.cpbackendapp.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 @CrossOrigin
@@ -61,8 +59,8 @@ public class ApplicationController {
     }
 
 
-    // http://localhost:9092/api/applications/open
-    @GetMapping(path="/applications/open")
+    // http://localhost:9092/api/applications/opened
+    @GetMapping(path="/applications/opened")
     public List<Application> getOpenApplications(){
         LOGGER.info("calling getOpenApplications method from controller");
         return applicationService.getOpenApplications();
@@ -73,6 +71,13 @@ public class ApplicationController {
     public List<Application> getFulfilledApplications(){
         LOGGER.info("calling getFulfilledApplications method from controller");
         return applicationService.getFulfilledApplications();
+    }
+
+    // http://localhost:9092/api/applications/jobtype/{jobtypeid}
+    @GetMapping(path="/applications/jobtype/{jobtypeId}")
+    public List<Application> getOthersJobApplications(@PathVariable(value = "jobtypeId") Long jobtypeId){
+        LOGGER.info("calling getOthersJobApplications method from controller");
+        return applicationService.getOthersJobApplications(jobtypeId);
     }
 
 }

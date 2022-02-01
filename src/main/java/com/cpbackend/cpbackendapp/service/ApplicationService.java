@@ -40,13 +40,13 @@ public class ApplicationService {
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Application application = applicationRepository.findByUserIdAndId(userDetails.getUser().getId(),
-                jobtypeId);
-
-        if (application != null) {
-            throw new InformationExistException("application for job type " + application.getJobType().getType() + " " +
-                    "already exists");
-        }
+//        Application application = applicationRepository.findByUserIdAndId(userDetails.getUser().getId(),
+//                jobtypeId);
+//
+//        if (application != null) {
+//            throw new InformationExistException("application for job type " + application.getJobType().getType() + " " +
+//                    "already exists");
+//        }
         Optional<JobType> jobType = jobTypeRepository.findById(jobtypeId);
         if (!jobType.isPresent()) {
             throw new InformationNotFoundException("Job Type " + jobType.get().getType() + " do not exists ");
@@ -81,6 +81,7 @@ public class ApplicationService {
         if (applicationList == null) {
             throw new InformationNotFoundException("User do not have any applications");
         }
+
         return applicationList;
     }
 
@@ -123,7 +124,6 @@ public class ApplicationService {
         return application;
     }
 
-
     public List<Application> getOpenApplications() {
         LOGGER.info("calling getOpenApplications method from service");
 
@@ -133,8 +133,6 @@ public class ApplicationService {
         return applicationRepository.findMyOpenApplications(userDetails.getUser().getId());
     }
 
-
-
     public List<Application> getFulfilledApplications() {
         LOGGER.info("calling getFulfilledApplications method from service");
 
@@ -142,6 +140,15 @@ public class ApplicationService {
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         return applicationRepository.findMyFulfilledApplications(userDetails.getUser().getId());
+    }
+
+    public List<Application> getOthersJobApplications(Long jobtypeId){
+        LOGGER.info("calling getOthersJobApplications method from service");
+
+        MyUserDetails userDetails =
+                (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return applicationRepository.findByJobTypeIdAndUserIdNot(jobtypeId,userDetails.getUser().getId() );
     }
 
 }

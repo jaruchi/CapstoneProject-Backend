@@ -18,12 +18,12 @@ public class Application {
 
     @ManyToOne
     @JoinColumn(name = "userid")
-    @JsonIgnore
+    //@JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "jobtypeid")
-    @JsonIgnore
+    //@JsonIgnore
     private JobType jobType;
 
     public Application() {

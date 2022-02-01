@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -64,11 +65,11 @@ public class AppReqMatchService {
 
         AppReqMatch appreqmatchObject = new AppReqMatch();
 
-        if(application.getJobType().getId()==requirement.getJobType().getId()){
-            appreqmatchObject.setAccepted(true);
-        }else{
-            throw new InformationNotFoundException("There is no match found");
-        }
+//        if(application.getJobType().getId()==requirement.getJobType().getId()){
+//            appreqmatchObject.setAccepted(true);
+//        }else{
+//            throw new InformationNotFoundException("There is no match found");
+//        }
 
         appreqmatchObject.setApplication(application);
         appreqmatchObject.setRequirement(requirement);
@@ -100,14 +101,32 @@ public class AppReqMatchService {
 
         AppReqMatch appreqmatchObject = new AppReqMatch();
 
-        if(application.getJobType().getId()==requirement.getJobType().getId()){
-            appreqmatchObject.setAccepted(true);
-        }else{
-            throw new InformationNotFoundException("There is no match found");
-        }
+//        if(application.getJobType().getId()==requirement.getJobType().getId()){
+//            appreqmatchObject.setAccepted(true);
+//        }else{
+//            throw new InformationNotFoundException("There is no match found");
+//        }
 
         appreqmatchObject.setApplication(application);
         appreqmatchObject.setRequirement(requirement);
         return appReqMatchRepository.save(appreqmatchObject);
+    }
+
+    public List<AppReqMatch> getAllMatchedRequirements() {
+        LOGGER.info("calling getAllMatchedRequirements method from service");
+
+        MyUserDetails userDetails =
+                (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return appReqMatchRepository.findMatchedRequirements(userDetails.getUser().getId());
+    }
+
+    public List<AppReqMatch> getAllMatchedApplications() {
+        LOGGER.info("calling getAllMatchedApplications method from service");
+
+        MyUserDetails userDetails =
+                (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return appReqMatchRepository.findMatchedApplications(userDetails.getUser().getId());
     }
 }

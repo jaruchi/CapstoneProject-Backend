@@ -70,4 +70,10 @@ public class RequirementController {
         LOGGER.info("calling getFulfilledRequirements method from controller");
         return requirementService.getFulfilledRequirements();
     }
+
+//    @GetMapping(path="/requirements/jobtype/{jobId}")
+//    public List<RequirementResponse> getAllRequirementsByJob(@PathVariable(value = "jobId") Long jobId){
+//        LOGGER.info("calling getAllRequirementsByJob method from controller");
+//        return requirementService.getAllRequirementsByJob(jobId);
+//    }
 }

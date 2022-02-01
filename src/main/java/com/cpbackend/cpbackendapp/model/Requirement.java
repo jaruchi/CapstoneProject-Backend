@@ -34,17 +34,17 @@ public class Requirement {
 
     @ManyToOne
     @JoinColumn(name = "userid")
-    @JsonIgnore
+    // @JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "jobtypeid")
-    @JsonIgnore
+    //@JsonIgnore
     private JobType jobType;
 
-//    @OneToOne(mappedBy = "jobtype", orphanRemoval = true)
+//    @OneToMany(mappedBy = "category", orphanRemoval = true)
 //    @LazyCollection(LazyCollectionOption.FALSE)
-//    private JobType jobTypeData;
+//    private List<JobType> jobTypeList;
 
     public Requirement() {
     }

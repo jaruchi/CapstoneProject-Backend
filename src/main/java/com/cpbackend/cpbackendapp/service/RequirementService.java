@@ -1,6 +1,5 @@
 package com.cpbackend.cpbackendapp.service;
 
-import com.cpbackend.cpbackendapp.exception.InformationExistException;
 import com.cpbackend.cpbackendapp.exception.InformationNotFoundException;
 import com.cpbackend.cpbackendapp.model.JobType;
 import com.cpbackend.cpbackendapp.model.Requirement;
@@ -33,26 +32,19 @@ public class RequirementService {
         this.jobTypeRepository = jobTypeRepository;
     }
 
-    public Requirement createRequirement(Long jobtypeId,Requirement requirementObject) {
+    public Requirement createRequirement(Long jobtypeId, Requirement requirementObject) {
         LOGGER.info("calling createRequirement method from service");
 
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Requirement requirement = requirementRepository.findByUserIdAndId(userDetails.getUser().getId(),
-                jobtypeId);
-
-        if (requirement != null) {
-            throw new InformationExistException("requirement for job type " + requirement.getJobType().getType() + " already " +
-                    "exists");
-        }
         Optional<JobType> jobType = jobTypeRepository.findById(jobtypeId);
         if (!jobType.isPresent()) {
             throw new InformationNotFoundException("Job Type " + jobType.get().getType() + " do not exists ");
         }
-            requirementObject.setUser(userDetails.getUser());
-            requirementObject.setJobType(jobType.get());
-            return requirementRepository.save(requirementObject);
+        requirementObject.setUser(userDetails.getUser());
+        requirementObject.setJobType(jobType.get());
+        return requirementRepository.save(requirementObject);
     }
 
     public Requirement getRequirement(Long requirementId) {
@@ -74,6 +66,10 @@ public class RequirementService {
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         List<Requirement> requirementList = requirementRepository.findByUserId(userDetails.getUser().getId());
+
+//        List<RequirementResponse> responses =
+//                requirementList.stream().map(req->new RequirementResponse(req)).collect(Collectors.toList());
+
         if (requirementList == null) {
             throw new InformationNotFoundException("User do not have requirements");
         }
@@ -140,4 +136,39 @@ public class RequirementService {
         return requirementRepository.findMyFulfilledRequirements(userDetails.getUser().getId());
 
     }
+
+//    public List<RequirementResponse> getAllRequirementsByJob(Long jobId) {
+//        LOGGER.info("calling getAllRequirementsByJob method from service");
+//
+//        MyUserDetails userDetails =
+//                (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        List<Requirement> requirementList = requirementRepository.findByUserIdAndJobId(userDetails.getUser().getId(),
+//                jobId);
+//        if(requirementList!=null){
+//            Optional<JobType> jobs = jobTypeRepository.findById(jobId);
+//            return jobs.stream()
+//                        .map(job -> new RequirementResponse(job)).collect(Collectors.toList());
+//        }
+//
+//
+//        return requirementList;
+//        Long userId=
+//                userDetails.getUser().getId();
+//        Category category = categoryRepository.findByIdAndUserId(categoryId,userId);
+//
+//        if (category != null) {
+//            return recipeRepository.findByCategoryIdAndUserId(categoryId,userId);
+////            if (recipes.isEmpty()) {
+////                throw new InformationNotFoundException("recipe not found");
+////            } else {
+////                return recipes.stream()
+////                        .filter(item -> item.getUser() != null &&
+////                                item.getUser().getId() == userDetails.getUser().getId()).collect(Collectors.toList());
+////            }
+//        }
+//        else {
+//            throw new InformationNotFoundException("category with id " + categoryId + " not found");
+//        }
+//    }
 }

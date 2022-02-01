@@ -18,12 +18,12 @@ public class AppReqMatch {
 
     @OneToOne
     @JoinColumn(name = "reqid")
-    @JsonIgnore
+    // @JsonIgnore
     private Requirement requirement;
 
     @OneToOne
     @JoinColumn(name = "appid")
-    @JsonIgnore
+    // @JsonIgnore
     private Application application;
 
     public AppReqMatch() {
