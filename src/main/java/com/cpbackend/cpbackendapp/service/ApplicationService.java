@@ -148,7 +148,7 @@ public class ApplicationService {
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        return applicationRepository.findByJobTypeIdAndUserIdNot(jobtypeId,userDetails.getUser().getId() );
+        return applicationRepository.findOthersOpenedApplications(jobtypeId,userDetails.getUser().getId() );
     }
 
 }

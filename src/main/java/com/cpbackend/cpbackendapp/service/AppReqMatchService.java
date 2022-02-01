@@ -87,15 +87,15 @@ public class AppReqMatchService {
         MyUserDetails userDetails =
                 (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Application application = applicationRepository.findByIdAndUserIdNot(userDetails.getUser().getId(),
-                applicationId);
-        if (application == null) {
+        Application appDontBelongToMe = applicationRepository.findByIdAndUserIdNot(applicationId,
+                userDetails.getUser().getId()
+                );
+        if (appDontBelongToMe == null) {
             throw new InformationNotFoundException("application for id"+ applicationId+ "do not exists");
         }
 
-        Requirement requirement = requirementRepository.findByUserIdAndId(requirementId,
-                userDetails.getUser().getId());
-        if (requirement == null) {
+        Requirement reqBelongToMe = requirementRepository.findByUserIdAndId(userDetails.getUser().getId(),requirementId);
+        if (reqBelongToMe == null) {
             throw new InformationNotFoundException("requirement for id"+ requirementId+ "do not exists");
         }
 
@@ -107,8 +107,8 @@ public class AppReqMatchService {
 //            throw new InformationNotFoundException("There is no match found");
 //        }
 
-        appreqmatchObject.setApplication(application);
-        appreqmatchObject.setRequirement(requirement);
+        appreqmatchObject.setApplication(appDontBelongToMe);
+        appreqmatchObject.setRequirement(reqBelongToMe);
         return appReqMatchRepository.save(appreqmatchObject);
     }
 
