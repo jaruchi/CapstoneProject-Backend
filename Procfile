@@ -1,1 +1,1 @@
-web: java -jar target com.cpbackend.cpbackendapp.CpBackendAppApplication
+web: java -jar target/com.cpbackend.cpbackendapp.CpBackendAppApplication
