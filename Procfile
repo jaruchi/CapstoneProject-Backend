@@ -1,1 +1,1 @@
-web: java -jar target/com.cpbackend.cpbackendapp.CpBackendAppApplication
+web: java -jar target/CPBackendApp-0.0.1-SNAPSHOT.jar
