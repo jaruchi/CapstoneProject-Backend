@@ -10,8 +10,8 @@ categories of jobs:
 This is the backend part of the application which provides APIs CRUD functionalities for requirements/applications.
 
 ERD Diagram
-- [Planning ERD](planning/erd.png)
-- [Final ERD](planning/CPBackend.jpeg)
+- [Planning ERD](planning/ERD.md)
+- [Final ERD](planning/ERD.md)
 
 ### MVP
 

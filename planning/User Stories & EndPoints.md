@@ -1,4 +1,4 @@
-### User Stories
+### User Stories & EndPoints
 
 ## User Model
 - A user can register
@@ -40,6 +40,7 @@
 
 ## JobType Model (Only for backend)
 - As a user, I should be able to create a jobtype.
+- As a user, I should be able to view all the job types
 
 ## JobType endpoints
 
