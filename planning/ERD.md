@@ -1,2 +1,2 @@
 - ![Planning ERD](./ERD.png | width=100)
-- ![Final ERD](planning/CPBackend.jpeg | width=100)
+- ![Final ERD](CPBackend.jpeg | width=100)
