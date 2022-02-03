@@ -13,6 +13,7 @@ ERD Diagram
 - [Planning ERD](planning/ERD.md)
 - [Final ERD](planning/ERD.md)
 
+
 ### MVP
 
 Minimum viable product is a working database for:
@@ -24,7 +25,7 @@ Minimum viable product is a working database for:
 - Also contains endpoints for **open** requirements/applications and **fulfilled** requirements/applications.
  
 User Stories / EndPoints
-- [User Stories & EndPoints](planning/User%20Stories%20&%20EndPoints)
+- [User Stories & EndPoints](/planning/User%20Stories%20&%20EndPoints)
 
 ### Bonus
 - A user can see their profile
