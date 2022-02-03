@@ -1,5 +1,5 @@
 # ERD
-![Planning ERD](/ERD.png)
+![Planning ERD](/planning/ERD.png)
 
 # Backend
-![Final ERD](/CPBackend.jpeg)
+![Final ERD](/planning/CPBackend.jpeg)
