@@ -10,8 +10,8 @@ categories of jobs:
 This is the backend part of the application which provides APIs CRUD functionalities for requirements/applications.
 
 ERD Diagram
-- [Planning ERD](planning/erd.png)
-- [Final ERD](planning/CPBackend.jpeg)
+- [Planning ERD](/planning/erd.png)
+- [Final ERD](/planning/CPBackend.jpeg)
 
 ### MVP
 
@@ -24,7 +24,7 @@ Minimum viable product is a working database for:
 - Also contains endpoints for **open** requirements/applications and **fulfilled** requirements/applications.
  
 User Stories / EndPoints
-- [User Stories & EndPoints](planning/User%20Stories%20&%20EndPoints)
+- [User Stories & EndPoints](/planning/User%20Stories%20&%20EndPoints)
 
 ### Bonus
 - A user can see their profile
