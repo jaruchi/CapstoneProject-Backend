@@ -11,7 +11,7 @@ This is the backend part of the application which provides APIs CRUD functionali
 
 ERD Diagram
 - [Planning ERD](/planning/ERD.md)
-- [Final ERD](/planning/ERD.md#Backend)
+- [Final ERD](/planning/ERD.md#backend)
 
 
 ### MVP
