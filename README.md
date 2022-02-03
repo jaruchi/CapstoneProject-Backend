@@ -66,6 +66,9 @@ User Stories / EndPoints
 - Using postgres, create a database called cpbackendapp
 - Open the file CPBackendApp/src/main/resources/application-dev.properties and change lines 1 to the
   proper port number (9092 recommended) and 3, 4 & 5 to be your postgres DB, username and password
+  
+### Deployed on Heroku
+[cumi](https://cu-mi.herokuapp.com/)
 
 ### Resources
 - [Spring CORS](https://www.baeldung.com/spring-cors)
