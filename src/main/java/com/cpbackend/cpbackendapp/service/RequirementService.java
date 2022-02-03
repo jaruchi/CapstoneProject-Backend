@@ -88,16 +88,17 @@ public class RequirementService {
             throw new InformationNotFoundException("requirement do not exists for this job");
         }
 
-        if (requirementObject.getTitle() != null)
-            requirement.setTitle(requirementObject.getTitle());
-        if (requirementObject.getReqDescription() != null)
-            requirement.setReqDescription(requirementObject.getReqDescription());
-//        if (requirementObject.getCreateDate() != null)
-//            requirement.setCreateDate(requirementObject.getCreateDate());
-//        if (requirementObject.getExpiredDate() != null)
-//            requirement.setExpiredDate(requirementObject.getExpiredDate());
-//        if (requirementObject.getModifiedDate() != null)
-//            requirement.setModifiedDate(requirementObject.getModifiedDate());
+       // if (requirementObject.getTitle() != null)
+        // if (requirementObject.getReqDescription() != null)
+
+        requirement.setTitle(requirementObject.getTitle());
+        requirement.setReqDescription(requirementObject.getReqDescription());
+        requirement.setDay(requirementObject.getDay());
+        requirement.setSubject(requirementObject.getSubject());
+        requirement.setLevel(requirementObject.getLevel());
+        requirement.setPets(requirementObject.getPets());
+        requirement.setAgeRange(requirementObject.getAgeRange());
+        requirement.setServices(requirementObject.getServices());
         return requirementRepository.save(requirement);
     }
 
@@ -150,25 +151,6 @@ public class RequirementService {
 //            return jobs.stream()
 //                        .map(job -> new RequirementResponse(job)).collect(Collectors.toList());
 //        }
+////        return requirementList;
 //
-//
-//        return requirementList;
-//        Long userId=
-//                userDetails.getUser().getId();
-//        Category category = categoryRepository.findByIdAndUserId(categoryId,userId);
-//
-//        if (category != null) {
-//            return recipeRepository.findByCategoryIdAndUserId(categoryId,userId);
-////            if (recipes.isEmpty()) {
-////                throw new InformationNotFoundException("recipe not found");
-////            } else {
-////                return recipes.stream()
-////                        .filter(item -> item.getUser() != null &&
-////                                item.getUser().getId() == userDetails.getUser().getId()).collect(Collectors.toList());
-////            }
-//        }
-//        else {
-//            throw new InformationNotFoundException("category with id " + categoryId + " not found");
-//        }
-//    }
 }

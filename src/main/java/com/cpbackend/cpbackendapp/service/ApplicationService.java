@@ -97,10 +97,21 @@ public class ApplicationService {
             throw new InformationNotFoundException("application do not exists for this job");
         }
 
-        if (applicationObject.getHeading() != null)
-            application.setHeading(applicationObject.getHeading());
+        //if (applicationObject.getHeading() != null)
+        application.setHeading(applicationObject.getHeading());
+        application.setAppDescription(applicationObject.getAppDescription());
+        application.setDay(applicationObject.getDay());
+        application.setSubject(applicationObject.getSubject());
+        application.setLevel(applicationObject.getLevel());
+        application.setPets(applicationObject.getPets());
+        application.setAgeRange(applicationObject.getAgeRange());
+        application.setServices(applicationObject.getServices());
+
+        //if (applicationObject.etHeading() != null)
+        //if (applicationObject.getHeading() != null)
+        //if (applicationObject.getHeading() != null)
+       // if (applicationObject.getHeading() != null)
         //if (applicationObject.)
-            //application.setModifiedDate(applicationObject.getModifiedDate());
         return applicationRepository.save(application);
     }
 

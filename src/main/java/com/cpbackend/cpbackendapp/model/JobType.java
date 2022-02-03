@@ -17,6 +17,12 @@ public class JobType {
     private String type;
 
     @Column
+    private String iconName;
+
+    @Column
+    private String illustrationPath;
+
+    @Column
     private String description;
 
 //    @JsonIgnore
@@ -27,8 +33,10 @@ public class JobType {
     public JobType() {
     }
 
-    public JobType(Long id, String type, String description) {
+    public JobType(Long id, String type, String description, String iconName, String illustrationPath) {
         this.id = id;
+        this.iconName = iconName;
+        this.illustrationPath = illustrationPath;
         this.type = type;
         this.description = description;
     }
@@ -55,5 +63,21 @@ public class JobType {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getIconName() {
+        return iconName;
+    }
+
+    public void setIconName(String iconName) {
+        this.iconName = iconName;
+    }
+
+    public String getIllustrationPath() {
+        return illustrationPath;
+    }
+
+    public void setIllustrationPath(String illustrationPath) {
+        this.illustrationPath = illustrationPath;
     }
 }

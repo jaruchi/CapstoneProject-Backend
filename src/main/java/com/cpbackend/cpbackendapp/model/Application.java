@@ -16,10 +16,26 @@ public class Application {
     @Column
     private String heading;
 
+    @Column
+    private String day;
+
+    @Column
+    private String level;
+
+    @Column
+    private String subject;
+
+    @Column
+    private String pets;
+
+    @Column
+    private String ageRange;
+
+    @Column
+    private String services;
 
     @Column
     private String appDescription;
-
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -34,9 +50,16 @@ public class Application {
     public Application() {
     }
 
-    public Application(Long id, String heading, String appDescription) {
+    public Application(Long id, String heading, String day,  String subject,
+                       String level, String pets, String ageRange, String services, String appDescription) {
         this.id = id;
         this.heading = heading;
+        this.day = day;
+        this.level = level;
+        this.subject = subject;
+        this.pets = pets;
+        this.ageRange = ageRange;
+        this.services = services;
         this.appDescription = appDescription;
     }
 
@@ -79,5 +102,53 @@ public class Application {
 
     public void setAppDescription(String appDescription) {
         this.appDescription = appDescription;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getPets() {
+        return pets;
+    }
+
+    public void setPets(String pets) {
+        this.pets = pets;
+    }
+
+    public String getAgeRange() {
+        return ageRange;
+    }
+
+    public void setAgeRange(String ageRange) {
+        this.ageRange = ageRange;
+    }
+
+    public String getServices() {
+        return services;
+    }
+
+    public void setServices(String services) {
+        this.services = services;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 }

@@ -24,13 +24,22 @@ public class Requirement {
     private String reqDescription;
 
     @Column
-    private Date createDate;
+    private String day;
 
     @Column
-    private Date expiredDate;
+    private String level;
 
     @Column
-    private Date modifiedDate;
+    private String subject;
+
+    @Column
+    private String pets;
+
+    @Column
+    private String ageRange;
+
+    @Column
+    private String services;
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -49,13 +58,17 @@ public class Requirement {
     public Requirement() {
     }
 
-    public Requirement(Long id, String title, String reqDescription, Date createDate, Date expiredDate, Date modifiedDate) {
+    public Requirement(Long id, String title, String reqDescription, String subject,
+                       String day, String level, String pets, String ageRange, String services) {
         this.id = id;
         this.title = title;
         this.reqDescription = reqDescription;
-        this.createDate = createDate;
-        this.expiredDate = expiredDate;
-        this.modifiedDate = modifiedDate;
+        this.day = day;
+        this.subject = subject;
+        this.level = level;
+        this.pets = pets;
+        this.ageRange = ageRange;
+        this.services = services;
     }
 
     public Long getId() {
@@ -90,35 +103,59 @@ public class Requirement {
         this.jobType = jobType;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getExpiredDate() {
-        return expiredDate;
-    }
-
-    public void setExpiredDate(Date expiredDate) {
-        this.expiredDate = expiredDate;
-    }
-
-    public Date getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
-
     public String getReqDescription() {
         return reqDescription;
     }
 
     public void setReqDescription(String reqDescription) {
         this.reqDescription = reqDescription;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getPets() {
+        return pets;
+    }
+
+    public void setPets(String pets) {
+        this.pets = pets;
+    }
+
+    public String getAgeRange() {
+        return ageRange;
+    }
+
+    public void setAgeRange(String ageRange) {
+        this.ageRange = ageRange;
+    }
+
+    public String getServices() {
+        return services;
+    }
+
+    public void setServices(String services) {
+        this.services = services;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 }
