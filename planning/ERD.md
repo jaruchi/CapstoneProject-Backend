@@ -1,2 +1,5 @@
-- ![Planning ERD](/ERD.png)
-- ![Final ERD](/planning/CPBackend.jpeg)
+# ERD
+![Planning ERD](/ERD.png)
+
+# Backend
+![Final ERD](/CPBackend.jpeg)
