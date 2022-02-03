@@ -25,7 +25,7 @@ Minimum viable product is a working database for:
 - Also contains endpoints for **open** requirements/applications and **fulfilled** requirements/applications.
  
 User Stories / EndPoints
-- [link](/planning/User%20Stories%20&%20EndPoints)
+- [User Stories & End Points](/planning/User%20Stories%20&%20EndPoints.md)
 
 ### Bonus
 - A user can see their profile
