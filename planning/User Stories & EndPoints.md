@@ -8,7 +8,7 @@
 ## User Auth endpoints
 | Request Type | URL                 | Request Body              | Request Header     | Action          | Access  |
 | ------------ | ------------------- | ------------------------- | ------------------ | --------------- | ------- |
-| POST         | auth/users/register | user                      |    | public  |
+| POST         | auth/users/register | user                      |                          body            | public  |
 | POST         | auth/users/login    | user login info           |                    | Login User      | public  |
 | GET          | auth/users/profile  | none                      | Authorization : Bearer TOKEN | Retrieving user | private |
 
